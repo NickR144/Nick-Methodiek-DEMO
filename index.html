@@ -1,3 +1,37 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO₂ Calculatie Methodiek v6.3 - P. van der Nat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .version-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            z-index: 2000;
+            box-shadow: 0 2px 10px rgba(231, 76, 60, 0.3);
+        }
+        
         .logo-container {
             position: absolute;
             top: 40px;
@@ -24,24 +58,6 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(255,255,255,0.2);
-        }<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CO₂ Calculatie Methodiek - P. van der Nat</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-            color: #2c3e50;
-            line-height: 1.6;
         }
         
         .header {
@@ -63,24 +79,6 @@
             font-size: 1.3em;
             opacity: 0.9;
             font-weight: 300;
-        }
-        
-        .formula-section {
-            background: #ecf0f1;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .formula-box {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            font-size: 1.5em;
-            color: #2c3e50;
-            margin: 0 auto;
-            max-width: 700px;
-            border: 2px solid #3498db;
         }
         
         .main-content {
@@ -171,6 +169,11 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
         }
         
         .stat-value {
@@ -215,6 +218,8 @@
         
         .data-table tr:hover {
             background: #e3f2fd;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
         }
         
         .debiteur-col {
@@ -276,10 +281,62 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
         }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .github-link {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        
+        .github-link:hover {
+            background: #4a6741;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .logo-container {
+                position: relative;
+                top: 0;
+                left: 0;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Logo rechtsboven -->
+    <!-- Version Badge -->
+    <div class="version-badge">v6.3</div>
+    
+    <!-- Logo links -->
     <div class="logo-container">
         <img src="images/Pvdnat Logo.png" alt="P. van der Nat Logo">
     </div>
@@ -562,19 +619,92 @@
         <button class="btn" onclick="showCalculation()">📊 Berekening Tonen</button>
         <button class="btn" onclick="exportData()">📁 Data Exporteren</button>
     </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 P. van der Nat Transport - CO₂ Calculatie Methodiek</p>
+        <p>Ontwikkeld voor nauwkeurige en eerlijke emissiemeting in groepage-ritten</p>
+        <a href="https://github.com/NickR144/Nick-Methodiek-DEMO" class="github-link" target="_blank">
+            📂 View on GitHub
+        </a>
+    </div>
 
     <script>
+        // Enhanced functions for v6.3
         function showDemo() {
-            alert('🗺️ Google Maps API + Pallet Weging\n\n✅ STAP 1: Google Maps afstand\n• Giessen → Alkmaar = 124 km\n• Giessen → Hoorn = 132 km\n• Giessen → Den Helder = 171.4 km\n\n✅ STAP 2: Gewichtsfactor berekenen\n• Floor Foods (3 pallets): 124 × 3 = 372\n• Allround Cargo (5 pallets): 124 × 5 = 620\n• Verschil: meer pallets = meer CO₂!\n\n✅ RESULTAAT: Eerlijke verdeling\n• 3 pallets → 10.38% → 42.82 kg CO₂\n• 5 pallets → 17.29% → 71.36 kg CO₂');
+            const modal = createModal('🗺️ Google Maps API + Pallet Weging', `
+                <div style="text-align: left; line-height: 1.6;">
+                    <h4 style="color: #27ae60; margin-bottom: 15px;">✅ STAP 1: Google Maps afstand</h4>
+                    <ul style="margin-bottom: 20px;">
+                        <li>Giessen → Alkmaar = 124 km</li>
+                        <li>Giessen → Hoorn = 132 km</li>
+                        <li>Giessen → Den Helder = 171.4 km</li>
+                    </ul>
+                    
+                    <h4 style="color: #3498db; margin-bottom: 15px;">✅ STAP 2: Gewichtsfactor berekenen</h4>
+                    <ul style="margin-bottom: 20px;">
+                        <li>Floor Foods (3 pallets): 124 × 3 = 372</li>
+                        <li>Allround Cargo (5 pallets): 124 × 5 = 620</li>
+                        <li><strong>Verschil: meer pallets = meer CO₂!</strong></li>
+                    </ul>
+                    
+                    <h4 style="color: #e67e22; margin-bottom: 15px;">✅ RESULTAAT: Eerlijke verdeling</h4>
+                    <ul>
+                        <li>3 pallets → 10.38% → 42.82 kg CO₂</li>
+                        <li>5 pallets → 17.29% → 71.36 kg CO₂</li>
+                    </ul>
+                </div>
+            `);
         }
         
         function showCalculation() {
-            alert('📊 Formule Uitleg met Voorbeeld\n\n🔵 OPDRACHT 4 (Allround Cargo Han):\n\ni = 4 (deze specifieke opdracht)\nj = alle opdrachten (1 t/m 16)\nΣ = som van alle gewichtsfactoren\n\nBerekening:\n1. Afstand₄ = 124 km (Google Maps)\n2. Pallets₄ = 5 stuks\n3. Gewichtsfactor₄ = 124 × 5 = 620\n4. Σ(Afstand_j × Pallets_j) = 3585.2\n5. % = (620 ÷ 3585.2) × 100% = 17.29%\n6. CO₂₄ = 17.29% × 412.66 kg = 71.36 kg\n\n💡 De "i" en "j" zorgen ervoor dat elke opdracht zijn eigen eerlijke aandeel krijgt!');
+            const modal = createModal('📊 Formule Uitleg met Voorbeeld', `
+                <div style="text-align: left; line-height: 1.6;">
+                    <h4 style="color: #2c3e50; margin-bottom: 15px;">🔵 OPDRACHT 4 (Allround Cargo Han):</h4>
+                    
+                    <div style="background: #ecf0f1; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                        <strong>Variabelen:</strong><br>
+                        i = 4 (deze specifieke opdracht)<br>
+                        j = alle opdrachten (1 t/m 16)<br>
+                        Σ = som van alle gewichtsfactoren
+                    </div>
+                    
+                    <h4 style="color: #27ae60; margin: 20px 0 10px 0;">Berekening:</h4>
+                    <ol>
+                        <li>Afstand₄ = 124 km (Google Maps)</li>
+                        <li>Pallets₄ = 5 stuks</li>
+                        <li>Gewichtsfactor₄ = 124 × 5 = 620</li>
+                        <li>Σ(Afstand_j × Pallets_j) = 3585.2</li>
+                        <li>% = (620 ÷ 3585.2) × 100% = 17.29%</li>
+                        <li>CO₂₄ = 17.29% × 412.66 kg = 71.36 kg</li>
+                    </ol>
+                    
+                    <div style="background: #d5f4e6; padding: 15px; border-radius: 5px; margin-top: 20px;">
+                        <strong>💡 De "i" en "j" zorgen ervoor dat elke opdracht zijn eigen eerlijke aandeel krijgt!</strong>
+                    </div>
+                </div>
+            `);
         }
         
         function exportData() {
-            alert('📁 Data Export\n\nDeze functie zou de CO₂ data exporteren naar CSV formaat voor gebruik in rapportage systemen.');
-        }
-    </script>
-</body>
-</html>
+            const csvContent = [
+                "Opdracht,Debiteur,Plaats,Pallets,Werkelijke_KM,Google_KM,Pallets_X_Afstand,Percentage,CO2_kg",
+                "1,OTR Oiltrade BV,Den Helder,1,171.4,171.4,171.4,4.78%,19.73",
+                "2,OTR Oiltrade BV,Den Helder,1,0,171.4,171.4,4.78%,19.73",
+                "3,Floor Foods B.V.,Alkmaar,3,43.9,124,372,10.38%,42.82",
+                "4,Allround Cargo Han,Alkmaar,5,0,124,620,17.29%,71.36",
+                "5,Snack Connection B,Hoorn,2,32.3,132,264,7.36%,30.39",
+                "6,All Day Nuts,Hoorn,1,0.8,-,0,0.00%,0.00",
+                "7,Allround Cargo Han,Middenbeemster,3,25.3,117,351,9.79%,40.40",
+                "8,Snack Connection B,Zaandam,5,23.6,104,520,14.50%,59.85",
+                "9,Allround Cargo Han,Velsen-Noord,2,15.8,108,216,6.02%,24.86",
+                "10,Leev.nu B.V.,Velsen-Noord,1,0,108,108,3.01%,12.43",
+                "11,Sligro Food Group N,Haarlem,1,15.3,99,99,2.76%,11.39",
+                "12,Elvee Holland B.V.,Amsterdam,1,14.1,90,90,2.51%,10.36",
+                "13,Sligro Food Group N,Amsterdam,1,22.2,85,85,2.37%,9.78",
+                "14,Sligro Food Group N,Amsterdam,1,2.6,82,82,2.29%,9.44",
+                "15,OTR Oiltrade BV,Giessen,1,84.5,171.4,171.4,4.78%,19.73",
+                "16,All Day Nuts,Giessen,1,0,132,132,3.68%,15.19"
+            ].join('\n');
+            
+            
